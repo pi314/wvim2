@@ -1,0 +1,58 @@
+body {
+    font-family:consolas;
+    font-size:25px;
+    background:black;
+    margin:0;
+    overflow:hidden;
+}
+
+#wvim_text {
+    border-spacing:0px;
+    word-break: break-all;
+}
+
+#wvim_status {
+    white-space:pre-wrap;
+    color:lightgray;
+}
+
+#alert {
+    white-space:pre-wrap;
+    color:lightgray;
+    background:red;
+}
+
+.linenum {
+    width: 50px;    /* magic number */
+    color:yellow;
+    float:left;
+    text-align:right;
+    margin-right:10px;
+    padding:0px;
+}
+
+.empty {
+    color:blue;
+    padding:0px;
+}
+
+.text {
+    color:lightgray;
+    white-space:pre-wrap;
+    padding:0px;
+}
+
+.cursor {
+    background:green;
+    white-space:pre;
+}
+
+.visual {
+    background:lightgray;
+    color:black;
+    white-space:pre;
+}
+
+.bracket {
+    background:darkCyan;
+}

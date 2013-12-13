@@ -1,0 +1,556 @@
+已可用按鍵
+============
+.   Normal Mode
+
+    .   移動類
+        h j k l ^ 0 $ w b e f F G gg H L % {} <C-e> <C-y>
+
+    .   插入類
+        i a I A o O
+
+    .   刪除類
+        x X D s C R r
+
+    .   其他
+        J V v <C-v> u <C-r> y p
+
+.   Delete Mode
+    
+    l h j k 0 ^ $ w b e f F t
+    i#, # = ()[]{}<>bB"'
+
+.   Change Mode
+    l h j k 0 ^ $ w b e f F t
+    i#, # = ()[]{}<>bB"'
+
+.   Copy Mode
+    y
+
+.   Visual Mode
+
+    .   插入類
+        I A
+
+    .   移動類
+        h l k j ^ 0 $ f F o O
+
+    .   刪除類
+        x X d D s S c C R r
+
+    .   其他
+        V v <C-v> y < >
+
+20131213
+==========
+.   把 KeyManager 和 jQuery 複製過來, 放到 github 上
+
+20130927
+==========
+.   [idea] 把 wvim 嵌入到別的頁面中
+
+.   [idea] 用 node.js 做到多人同時編輯
+    設定讓一行只能有一個游標
+
+20130907
+==========
+.   修正 copy_keydown，使按下不對的按鍵會回到 Normal mode。
+
+.   實作 [Normal] yi*。
+
+.   新增 SHIFT_LEFT、SHIFT_RIGHT state，實作 [Normal] >> <<。
+    shift_left_keydown、shift_right_keydown 都放在 _shift_keydown.js。
+
+.   預計還需實作功能：
+    .   input、textarea 元素 enable。
+    .   重繪畫面優化
+    .   數字
+    .   中文
+
+20130906
+==========
+.   增加 align_bottom 函式，使畫面縮放時的行為比較接近 vim。
+
+.   發現目前的 keymanager 會把按鍵都抓走，導致 input 元素無法使用。
+    待修改。
+
+.   預計還需實作功能：
+    .   [Normal] yib
+    .   [Normal] >> <<
+    .   重繪畫面優化
+    .   數字
+    .   中文
+
+20130903
+==========
+.   實作 belt_count function，偵測 browser 高度計算 belt 數
+    也使用 jQuery .resize 在 browser 大小改變時重新計算 belt 數
+
+.   實作 check_display_range，使 cursor 一直留在畫面內
+
+.   實作 [Normal] <C-e> <C-y>
+
+.   belt 用動畫顯示的 CP 值不高，不採用
+
+.   預計還需實作功能：
+    .   [Normal] yib
+    .   [Normal] >> <<
+    .   重繪畫面優化
+    .   數字
+    .   中文
+
+20130902
+==========
+.   準備自行製作畫面顯示 buffer，用固定的 div (之類的) 來顯示更多行數的內容
+    這些 buffer 暫時命名為 belt
+    這個技術將會用來重寫作品集首頁
+
+.   [idea] 在 wvim 初始化顯示 belt 時用動畫，一條一條的顯示出來，總時間約為 1 秒
+
+.   [idea] 把文字區最下方的幾條 belt 不透明度調低
+
+.   預計還需實作功能：
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Normal] yib
+    .   [Normal] >> <<
+    .   數字
+    .   中文
+
+20130901
+==========
+.   實作 [Normal] cc
+
+.   預計還需實作功能：
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Normal] yib
+    .   [Normal] >> <<
+    .   數字
+    .   中文
+
+20130816
+==========
+.   增加 [Delete] 方向鍵。
+
+.   修正 [Change] l h 0 ^。
+
+.   修改 [Normal] ^ 實作方式，行為不變。
+
+.   修正 [Change] j k。
+
+.   預計還需實作功能：
+    .   [Normal] cc
+    .   [Normal] >> <<
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   中文
+
+20130810
+==========
+.   更改下方訊息條重繪時間在每次按鍵之後，用一個全域變數記錄內容和種類，
+    並在 Command Mode 時不重繪。
+
+.   增加 [Normal] [Insert] [Visual*] 方向鍵。
+
+.   修正：[Visual*] 按下 Esc 後游標的位置若超過該行長度的話，需要調整到行尾。
+
+.   預計還需實作功能：
+    .   [Normal] >> <<
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   中文
+
+20130809
+==========
+.   定義 wvim 環境變數介面，取值用 get_wvim_global_var，設值用 set_wvim_global_var。
+
+.   實作 [Normal] r。新增三個 VISUAL 衍生狀態，實作 [Visual*] r。
+
+.   修正 [Visual Block] 的反白行為。
+
+.   修正 [Normal] p 游標和顯示位置不一樣導致貼上後多出許多空白。
+
+.   已加入剪貼簿：[Normal] D、[Visual] x、[Visual Line] x，[Visual Block] x。
+    修正：原來 Visual* p 會引用 x，但這樣會破壞剪貼簿的內容，新增函式分離刪除和複製。
+    [Delete] d。
+
+.   預計還需實作功能：
+    .   [Normal] >> <<
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   中文
+
+20130806
+==========
+.   新增 COMMAND State，實作 Command Mode，提供 wvim.bind 函式來定義指令的行為。
+
+.   實作存檔，效果有點差。
+
+.   實作 set nu，修改 draw_normal 行為，使空行不會完全不見。
+
+.   預計還需實作功能：
+    .   wvim 環境變數
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Visual] r
+    .   中文
+
+20130805
+==========
+.   實作 [Visual] y，實作 [Visual Block] y，實作 [Normal] p。
+    從剪貼簿貼上前會先修改 history 記錄的 cursor 位置，以符合 vim 的行為。
+
+.   修改 Insert Mode 行為，在按 Enter 時會自己縮排對齊上一行。
+
+.   實作 [Visual*] < >
+
+.   實作 [Visual*] p。
+    修正：在 Visual Block Mode 下複製，在 Normal Mode 下貼上，若因此產生新的行會出現錯誤。
+
+.   補上 CHANGE_FIND, CHANGE_DNIF, DELETE_TO, CHANGE_TO 的訊息。
+
+.   預計還需實作功能：
+    .   存檔
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Visual] r
+    .   中文
+
+20130804
+==========
+.   簡單實作 [Normal] u <C-r>，行為和 vim 有些不同。
+    在 State 改變的時候檢查 data 是否有被改變，若有則 push 進 history 中。
+
+.   新增 REPLACE State，實作 Replace Mode。
+
+.   實作下方顯示訊息。
+
+.   新增 COPY State，實作 [Normal] y，實作 [Copy] y。
+    實作 [Normal] p (部份)，實作 [Visual Line] y。
+
+.   預計還需實作功能：
+    .   存檔
+    .   數字
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Visual] r
+    .   中文
+
+20130801
+==========
+.   發現 _change_keydown.js 怪怪的，可能是昨天有誤刪東西，重新實作 [Change] w b。
+    實作 [Change] e。
+
+.   實作 [Change] f F。
+
+.   實作 [Normal] C。
+
+.   實作 [Normal] S，實作 [Change] c。
+
+.   新增 DELETE_TO State，實作 [Delete] t，DELETE_TO State 套用 delete_find_keydown 函式。
+    新增 CHANGE_TO State，實作 [Change] t，CHANGE_TO State 套用 change_find_keydown 函式。
+
+.   新增 CHANGE_IN State，實作 [Change] i，引用 delete_in_keydown 函式。
+    change_in_keydown 也放在 _delete_in_keydown.js。
+
+.   預計還需實作功能：
+    .   [Normal] u <C-r>
+    .   剪貼簿
+    .   下方顯示訊息
+    .   [Normal] <C-e> <C-y>
+
+.   實作 [Normal] u，使用 pointer 指向最上一個元素的 stack。
+    history 把每次離開 Insert Mode 時的 cursor 及 data 複製一次。
+    其他 state 也需完成。
+
+.   預計還需實作功能：
+    .   [Normal] u <C-r>
+    .   Replace Mode
+    .   剪貼簿
+    .   下方顯示訊息
+    .   存檔
+    .   [Normal] <C-e> <C-y>、訊息條置底
+    .   [Visual] r
+    .   中文
+
+20130731
+==========
+.   實作 [Delete] l h j k 0 ^ $。
+
+.   發現 [Normal] w 和 vim 行為不一樣。
+
+.   發現 [Visual] x 對 cursor 的處理錯誤，已修正。
+
+.   實作 [Delete] w b e。
+
+.   修正 [Normal] w b，把換行字元也考慮進單字判斷中。
+    [Normal] e 沒有修改，和原本行為一樣。
+
+.   新增 DELETE_FIND state，引用 FIND 的行為，實作 [Delete] f F。
+
+.   發現 DNIF 都打成 DINF 了，已修正。
+
+.   把 DELETE_FIND State 放進 _find_keydown.js，
+    Visual 相關的 Find state 合併進 find_keydown 函式，
+    未來 Find 相關的函式也都放進 _find_keydown.js。
+
+.   新增 Change State，實作 [Change] l h j k 0 ^ $ w b
+
+20130730
+==========
+.   發現 di# 忽略了 <>，補上。
+
+.   修正：離開 Visual Mode 時反白處不會消失。
+
+.   實作 [Visual Block] h j k l f F v V <C-v> S R。
+
+.   實作 [Visual Block] o O。
+
+.   新增 INSERT_BLOCK state，實作多行插入行為，visual_cursor 也用來記錄多行插入的範圍。
+    實作 [Visual Block] I A
+
+.   實作 [Visual Block] s c。
+
+.   修正：發現不同的 Visual Mode 的 X D 行為不一樣。
+    實作 [Visual Block] x X d D
+
+.   實作 [Visual Block] C
+
+.   發現功能：[Visual] u 可以轉小寫，[Visual] U 可以轉大寫。
+
+.   實作 [Normal] {}
+
+.   預計還需實作功能：
+    .   [Normal] cw ci#
+    .   [Normal] u <C-r>
+    .   剪貼簿
+    .   [Normal] <C-e> <C-y>
+
+.   實作 [Normal] s
+
+.   發現 [Normal] dw 有問題，有一些情況不能直接套用 Normal 的結果。
+    Delete State 需修改。
+
+.   決定把 State stack 架構改掉，需要重疊的 State 就合併成新的 State。
+    這樣會多出很多 State (主要是 find 系列)，讓程式碼變長，但可以確保各功能的實作內容分開。
+
+20130729
+==========
+.   稍微修改 redraw_visual 的參數，改用 state 決定行為，並合併進 load 函式。
+
+.   修正：在 Visual Line 模式把全部內容反白後按 x 會造成錯誤。
+
+.   實作 [Visual][Visual Line] s S c C R I o O。
+
+.   寫了一個 find.py 用來在檔案中找字串。
+
+20130728
+==========
+.   新增 VISUAL state，實作 [Normal] v。
+
+.   發現成對括號上色會影響 Visual Mode，大略修改。
+
+.   發現 array 的比較是先轉成 string，所以會出錯。
+
+.   為了化簡程式，未來需要把 redraw 相關函式都合併進 load 函式，並把 load 改名為 redraw。
+    但還是儘量不要每次都重畫。
+
+.   發現「括號上色和 Visual 區域出現在同一行」的狀況沒有考慮到，需要從 draw_bracket 修改。
+    用「枚舉法」(暴力法)實作完成。
+
+20130727
+==========
+.   化簡 find_pair_bracket function。
+
+.   新增 DELETE_IN state，實作 [Normal] di*，並把兩個相似的函式合併為一個。
+
+.   因為 td 的 padding 變為 0px，總高度變低，故預設行數增加為 21 行 (原 19 行)。
+
+20130726
+==========
+.   簡單實作 Visual Mode 需要的 draw_visual, wrap_visual，但還沒增加 Visual State。
+    試用後效果還可以。
+    預計會增加 VISUAL_LINE, VISUAL, VISUAL_BLOCK 三個 state。
+
+.   實作 [Visual Line] h l k j ^ 0 $
+
+.   發現 [Normal] w b e 有問題，相鄰兩行間的換行字元沒有被考慮到。
+    已修改完成。
+
+.   發現之前對 state stack 的處理有問題，只適用 [NORMAL, DELETE]，已修改。
+    實作 [Visual Line] f F
+
+.   實作 [Visual Line] x X d D
+
+.   實作成對括號上色完成。成對括號上色定為 darkCyan = rgb(0, 127, 127)。
+
+.   實作 [Normal] %
+
+20130722
+==========
+.   把 td 的 padding 改成 0。預設為 1px，會影響 Visual 的效果。
+
+20130721
+==========
+.   補上 draw function 目前的結構，傳入值格式如下：
+
+    draw(line, "TYPE", pos)
+
+    TYPE
+    "NORMAL"
+    "CURSOR"    pos
+    "VISUAL"    [from, to]
+    "BRACKET"   [pos, cur[0], cur[1]]
+
+    每一個不同的 TYPE 都會各自再呼叫另外的 function 來實作。
+
+    BRACKET 作用包含 "(", "[", "{", "<" (雖然vim 不會對 < 上色)
+
+    有關 XSS 的問題，想到一個解決方式，
+    可以是把每一個 "<" 和 ">" 都像 cursor 一樣用 span tag 包起來。
+    測試了 <span><</span> 可以正常顯示，等待實作。
+
+.   把 "<" 包起來後就可以使用了，不需要處理 ">"。
+    JavaScript 的 String.replace function 只能取代第一個找到的子字串，
+    目前是手動檢查原字串來取代，也許需要再找是否有內建的 function 可以用。
+
+    "<" 的問題已解決，XSS 則是不需要解決，因為這個作品不需要儲存資料。
+    構想是另外編寫一支 PHP (或 Python) Script，作為儲存頁面。
+    主頁面用 POST 把資料丟過去，儲存頁面直接輸出，但是修改 HTML 的 Header，
+    讓純文字也能被直接下載，這樣使用者按下 :wq 時就會自動下載剛才的內容。
+
+.   Visual Mode 可能也會使用同樣的技巧，把每個字都包起來，
+    這樣斷行的行為一樣可以保留，而且反白的行為也和 vim 較一致。
+    反白時括號可以不上色。
+
+20130720
+==========
+.   為了實作 Visual Mode，順便解決 XSS 的問題，把 draw function 重寫，
+    並為 Visual Mode 和成對括號上色做好擴充性。
+    卻發現目前的 HTML Node 結構無法解決 XSS 問題。
+    在有游標的行，HTML Node 結構如下：
+    <tr>
+        <td> Line Number </td>
+        <td class="text">
+            data 前段
+            游標
+            data 後段
+        </td>
+    </tr>
+    若該行太長，使資料後段需換行，會無法使用另一個 HTML Tag 把後段包起，
+    導致整個 text td 的內容需用 .html() 設定，即無法避免 XSS。
+    但若直接把後段用 HTML Tag 包起，資料太長換行的問題將無法解決。
+    考慮過手動計算資料的長度，手動模擬斷行，但這樣對往後中文的擴充會有障礙，
+    且若使用者的字體大小更改即會計算錯誤。
+
+    另外 XSS 的問題也包含 "不能輸入尖括號"。
+
+20130716
+==========
+.   完成 [insert] backspace
+.   完成 [Normal] G
+.   發現 [Normal] > 和 < 也會進入新狀態
+
+.   修改 state 為一個 stack
+.   把 delete 的機制修改，用游標行數差來計算需刪除的行
+    隔一個 state 也能作用
+    也做了保護，如果刪完後資料全部消失，就生出一個新的行
+
+20130714
+==========
+.   完成 [Normal] J 串接兩行
+.   完成 [Normal] H L 在頁首頁尾移動
+.   完成 [Normal] <C-l> 洗畫面(視覺上沒有效果
+.   發現 [Normal] w 有問題，會一次跳太多，已知道原因，先刪除原程式碼
+.   發現會被 XSS injection，待修改
+.   完成 [Normal] w
+.   完成 [Normal] b
+.   完成 [Normal] e
+.   修改 draw 函式，增加一個參數使 draw 可以不畫出游標
+
+20130710
+==========
+.   完成 [Normal] dd 刪除一行
+.   完成 [Normal] dl dh d$ d^
+
+20130709
+==========
+為了實作方便，刪除相關的狀態應該要有以下幾個
+.   DELETE
+    f -> DELETE-FIND
+    F -> DELETE-DINF
+    d -> 刪除一行
+    j -> 刪除游標行和下一行，游標停在原下兩行
+    k -> 刪除游標行和上一行，游標停在原下兩行
+    l -> 等於 x
+    h -> 等於 X
+    $ -> 等於 D
+    ^ -> 刪到行首，前面的空白不受影響
+    ...
+    部份功能應該要先把當前的游標位置存下，
+    移動後再和原本的游標位置計算出需刪除的區段。
+    (數字) -> DELETE-MUL
+
+.   DELETE-FIND
+.   DELETE-DINF
+.   DELETE-IN
+
+.   DELETE-MUL
+
+20130707
+==========
+.   發現 [Normal] I 把遊標放到 0 而非行首
+    呼叫了一次 normal_keydown('^') 來修正
+
+.   發現 [Normal] D 會把整行刪掉，和應有的行為不符
+    修正為 "把游標以後的字元刪除"
+
+.   完成 [Normal] f F
+
+20130704
+==========
+.   發現斷行問題是 word-break: break-all; 和 white-space: pre; 衝突。
+    用 white-space: pre-wrap; 解決
+
+.   完成 [Normal] ^ 0 $ D o O 按鍵
+
+.   半完成 w 按鍵
+
+.   有點累，所以先換一下主題，寫了一個小小的計時器
+    Working/timer
+
+
+20130701
+==========
+.   開始動工，發現之前和 Hank 討論的 CSS 不 work，所以還是用了 table。
+    結構
+    <table id="wvim_window">
+      <tr class="line">
+        <td class="linenum">1</td>
+        <td class="text">asd</td>
+      </tr>
+    </table>
+    為了方便就先省了 thead tbody 等 tag，反正 browser 會自己加。
+
+.   先顯示 20 行就好，更多的之後再考慮。
+
+.   做了一個 compile.py 用來把檔案合併。
+
+.   游標的位置計算還是很麻煩。簡單的把 [Normal] i a I A x X hjkl 做好了。今天就先這樣吧。
+
+.   斷行的問題出現了，應該是因為 table 的特性不同所以原本的 CSS 不能套用，得找別的方法解決。
+
+
+20130601
+==========
+準備開始編寫 wvim，預計會花很長的時間在這個 project 上
+有很多東西需要先定好，不然之後會很難修改
+
+.   CSS
+
+    .   行寬
+        行寬要和 browser 等寬，且在 browser 大小變動時需要跟著改變
+        這個不能用 javascript 硬作，需要用 browser 的排版引擎來算
+        
+    .   行數
+        先假設 browser 大小不會變動，所以能夠一開始就先決定好能顯示的行數
+        如果行數比較多時，可能會超出 browser 能一次顯示的量
+        可能會需要手動維護一組 "line"，這些 "line" 會重複使用
+        在 vim 中，如果一行太多沒辦法顯示就會改為 @ 符號，wvim 不用做這個
